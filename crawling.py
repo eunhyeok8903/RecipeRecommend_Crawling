@@ -1,27 +1,21 @@
 import requests
 from bs4 import BeautifulSoup
 
-baseUrl = 'http://www.10000recipe.com/'
-
+baseUrl = 'http://www.10000recipe.com/recipe/'
 
 def CrawlingBetweenRanges(mydb, startRecipeId, endRecipeId):
     for i in range(startRecipeId, endRecipeId):
         if i % 10 == 0:
             print("count: " + str(i))
-        res = PageCrawler('recipe/' + str(i))
+        res = PageCrawler(str(i))
         if res is None:
             continue
 
-        menuId = mydb.insert_menu(res[0][0], baseUrl + 'recipe/' + str(i))
+        menuId = mydb.insert_menu(res[0][0], baseUrl+str(i))
         for key, value in res[1].items():
             for name in value:
                 if key == "[재료]" or key == "[양념]":
                     mydb.insert_ingredient(menuId, name)
-
-        #recipe오더는 안함
-        # for recipeOrder in res[2]:
-        #   mydb.insert_recipeOrder(recipeOrder, menuId)
-
 
 def PageCrawler(recipeUrl):
     url = baseUrl + recipeUrl
@@ -70,6 +64,5 @@ def PageCrawler(recipeUrl):
     #     return
 
     # recipe_all = [recipe_title, recipe_source, recipe_step]
-    recipe_all = [recipe_title, recipe_source]
-    print(recipe_all)
+    recipe_all = [recipe_title, recipe_source]  #제목, 재료
     return (recipe_all)

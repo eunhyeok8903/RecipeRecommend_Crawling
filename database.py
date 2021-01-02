@@ -44,6 +44,7 @@ class MysqlController:
     #     except self.conn.DatabaseError as e:
     #         print(e)
 
+    #재료명들 select
     def select_ingredient_iname(self):
         try:
             sql = 'SELECT (iname) FROM ingredient'
