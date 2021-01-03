@@ -33,20 +33,16 @@ class stopwordFilter:
             line = re.sub(pattern=patternSymbol, repl='', string=line)
 
             line = line.rstrip('\n')
-            ingredientArr = line.split(' ')
-            writeStr = str()
+            #mecab dictionary에서 우선순위처리와 단어등록해줘야하고 마지막으로 아래에서 불용어처리해주어야함
+            temp=self.mecab.nouns(line)
+            temp=" ".join(temp)
+            ingredientArr = temp.split(' ')
+            writeStr = ""
+            #불용어처리
             for ingredient in ingredientArr:
-                if ingredient not in self.stopword:
-
-                    #이부분 체크
-                    writeStr += (' ' + ingredient)
-                    # writeStr += (ingredient)
-
-            if writeStr != "":
-                writeStr = writeStr.lstrip(' ') + '\n'
-                temp=self.mecab.nouns(writeStr)
-                print(temp)
-                wf.write(writeStr)
+                print(ingredient)
+                if ingredient not in self.stopword and ingredient!="":
+                    wf.write(ingredient+'\n')
             if not line:
                 break
 
