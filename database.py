@@ -28,22 +28,6 @@ class MysqlController:
         except self.conn.DatabaseError as e:
             print(e)
 
-    # def insert_recipeOrder(self, context, menuId):
-    #     try:
-    #         sql = 'INSERT INTO recipeorder(context, menuId) VALUES (%s, %s)'
-    #         self.curs.execute(sql, (context, menuId))
-    #         self.conn.commit()
-    #     except self.conn.DatabaseError as e:
-    #         print(e)
-
-    # def insert_sauce(self, menuId, sname):
-    #     try:
-    #         sql = 'INSERT INTO sauce(menuId, sname) VALUES (%s, %s)'
-    #         self.curs.execute(sql, (menuId, sname))
-    #         self.conn.commit()
-    #     except self.conn.DatabaseError as e:
-    #         print(e)
-
     #재료명들 select
     def select_ingredient_iname(self):
         try:

@@ -16,7 +16,7 @@ def main():
 
     #불용어 처리
     swFilter = stopwordFilter(myDB)
-    swFilter.makeIngredientToText()
+    # swFilter.makeIngredientToText()
     swFilter.eliminateStopwordFromIngredient()
 
 

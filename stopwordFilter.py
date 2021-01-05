@@ -28,23 +28,28 @@ class stopwordFilter:
 
         rf = open('textFile/ingredientList.txt', mode='rt', encoding='utf-8')
         wf = open('textFile/ingredientListElimStopword.txt', mode='wt', encoding='utf-8')
+        cnt=0
         for line in rf:
             line = re.sub(pattern=patternBlank, repl='', string=line)
             line = re.sub(pattern=patternSymbol, repl='', string=line)
-
+            cnt+=1
+            print(cnt)
             line = line.rstrip('\n')
             #mecab dictionary에서 우선순위처리와 단어등록해줘야하고 마지막으로 아래에서 불용어처리해주어야함
             temp=self.mecab.nouns(line)
             temp=" ".join(temp)
             ingredientArr = temp.split(' ')
-            writeStr = ""
+
             #불용어처리
             for ingredient in ingredientArr:
                 print(ingredient)
                 if ingredient not in self.stopword and ingredient!="":
                     wf.write(ingredient+'\n')
-            if not line:
-                break
+
+            # if not line:
+            #     print(line)
+            #     print("fuck")
+            #     break
 
     def makeIngredientToText(self):
         ingredientList = self.myDB.select_ingredient_iname()
